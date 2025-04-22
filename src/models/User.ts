@@ -1,4 +1,4 @@
-import { Schema, models, model, Document } from "mongoose";
+import { Schema, models, Types, model, Document } from "mongoose";
 
 export interface IUser extends Document  {
     fullName: string,
@@ -7,10 +7,7 @@ export interface IUser extends Document  {
     profilePic: string,
     isVerified: boolean,
     role: string,
-    agentApplicationIdCard: string,
-    agentApplicationVideo: string,
-    agentApplicationStatus: string,
-    agentApplicationFeedback: string,
+    savedListings: Types.ObjectId[],
 }
 
 const userSchema = new Schema<IUser>({
@@ -39,20 +36,10 @@ const userSchema = new Schema<IUser>({
         default: "regular",
         enum: ["regular", "agent", "admin"]
     },
-    agentApplicationIdCard: {
-        type: String,
-    },
-    agentApplicationVideo: {
-        type: String,
-    },
-    agentApplicationStatus: {
-        type: String,
-        default: "pending",
-        enum: ["rejected", "accepted", "pending"]
-    },
-    agentApplicationFeedback: {
-        type: String,
-    },
+    savedListings: [{
+        type: Types.ObjectId,
+        ref: "Listing",
+    }],
 },{
     timestamps: true,
 })
