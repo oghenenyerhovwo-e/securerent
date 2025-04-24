@@ -1,0 +1,25 @@
+.loadingWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 1rem;
+    background-color: var(--clr-background);
+    color: var(--clr-text);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0.6;
+  }
+  
+  .loader {
+    width: 3rem;
+    height: 3rem;
+    border: 0.4rem solid var(--clr-grey-1);
+    border-top: 0.4rem solid var(--clr-primary);
+    border-radius: 50%;
+  }
+
+  

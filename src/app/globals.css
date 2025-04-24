@@ -5,7 +5,7 @@
 :root {
   --color-scheme: light;
 
-  --font-family: system-ui;
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
 
   --fs-200: clamp(0.75rem, calc(0.73rem + 0.004vw), 0.79rem);
   --fs-300: clamp(0.94rem, calc(0.92rem + 0.08vw), 0.98rem);
@@ -16,18 +16,40 @@
   --fs-800: clamp(2.33rem, calc(1.7rem + 3.15vw), 4.14rem);
   --fs-900: clamp(2.8rem, calc(1.85rem + 4.74vw), 5.52rem);
 
-  --clr-background: hsl(312, 83%, 98%);
-  --clr-background-dark: hsl(308, 80%, 2%);
-  --clr-text: hsl(313, 78%, 7%);
-  --clr-text-dark: hsl(311, 78%, 93%);
+  --color-scheme: light;
 
-  --clr-primary: hsl(315, 79%, 50%);
-  --clr-primary-dark: hsl(315, 79%, 50%);
-  --clr-secondary: hsl(154, 55%, 75%);
-  --clr-secondary-dark: hsl(52, 78%, 27%);
-  --clr-accent: hsl(83, 78%, 64%);
-  --clr-accent-dark: hsl(83, 78%, 36%);
+  --clr-background: hsl(160, 60%, 98%);
+  --clr-text: hsl(153, 53%, 3%);
+  --clr-primary: hsl(153, 57%, 51%);
+  --clr-secondary: hsl(192, 56%, 74%);
+  --clr-accent: hsl(205, 57%, 61%);
+  --clr-grey-1: hsl(0, 0%, 80%);
+  --clr-grey-2: hsl(0, 0%, 40%);
+  --clr-error: hsl(0, 70%, 50%);
+  --clr-gradient: linear-gradient(135deg, 
+    hsl(153, 57%, 51%) 0%, 
+    hsl(192, 56%, 74%) 50%, 
+    hsl(205, 57%, 61%) 100%);
+
 }
+
+
+html[data-theme='dark'] {
+  --clr-background: hsl(160, 60%, 2%);
+  --clr-text: hsl(158, 50%, 97%);
+  --clr-primary: hsl(153, 57%, 49%);
+  --clr-secondary: hsl(191, 56%, 26%);
+  --clr-accent: hsl(205, 57%, 39%);
+  --clr-grey-1: hsl(0, 0%, 30%);
+  --clr-grey-2: hsl(0, 0%, 65%);
+  --clr-error: hsl(0, 100%, 70%);
+  --clr-gradient: linear-gradient(135deg, 
+    hsl(153, 57%, 49%) 0%, 
+    hsl(191, 56%, 26%) 50%, 
+    hsl(205, 57%, 39%) 100%);
+}
+
+
 /* https://www.realtimecolors.com/?colors=fbdff6-090108-e41bb2-7b6c0f-6da314&fonts=Inter-Inter */
 *,
 *::before,
@@ -42,7 +64,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-family);
-  font-size: var(--fs-400);
+  font-size: var(--fs-300);
   line-height: 1.6;
   background-color: var(--clr-background);
   color: var(--clr-text);
@@ -114,7 +136,7 @@ html {
 }
 
 .bg-primary {
-  background: var(--clr-primary-500);
+  background-color: var(--clr-primary-500);
 }
 
 .visually-hidden {
@@ -163,3 +185,5 @@ html {
 .spacing-xxl{
   margin-bottom: 8rem;
 }
+
+

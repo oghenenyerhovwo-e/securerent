@@ -1,0 +1,59 @@
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup > label {
+  font-weight: 500;
+  font-size: var(--fs-300);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 0.4rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  padding-right: 2.5rem;
+  font-size: var(--fs-300);
+  border: 1px solid var(--clr-grey-1);
+  border-radius: 0.4rem;
+  outline: none;
+  background-color: var(--clr-background) !important;
+  color: var(--clr-text);
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  border-color: var(--clr-primary);
+}
+
+.inputWrapper input:-webkit-autofill {
+  font-size: var(--fs-300) !important;
+  background-color: var(--clr-background) !important;
+  color: fieldtext var(--clr-text);
+  -webkit-box-shadow: 0 0 0px 1000px var(--clr-background) inset !important;
+  -webkit-text-fill-color: var(--clr-text) !important;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 0.8rem;
+  cursor: pointer;
+  color: var(--clr-grey-2);
+  font-size: 1.2rem;
+}
+
+.errorInput {
+  border-color: var(--clr-error);
+}
+
+.errorText {
+  color: var(--clr-error);
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
