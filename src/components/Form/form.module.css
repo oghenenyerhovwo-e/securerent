@@ -4,7 +4,7 @@
 }
 
 .inputGroup > label {
-  font-weight: 500;
+  font-weight: 600;
   font-size: var(--fs-300);
 }
 
@@ -24,7 +24,7 @@
   border-radius: 0.4rem;
   outline: none;
   background-color: var(--clr-background) !important;
-  color: var(--clr-text);
+  color: var(--clr-grey-2);
   transition: border-color 0.3s ease;
 }
 
@@ -37,7 +37,7 @@
   background-color: var(--clr-background) !important;
   color: fieldtext var(--clr-text);
   -webkit-box-shadow: 0 0 0px 1000px var(--clr-background) inset !important;
-  -webkit-text-fill-color: var(--clr-text) !important;
+  -webkit-text-fill-color: var(--clr-grey-2) !important;
 }
 
 .eyeIcon {

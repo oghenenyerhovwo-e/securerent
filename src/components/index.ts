@@ -1,5 +1,7 @@
 import {
     Input,
+    SignupForm,
+    LoginForm,
 } from "./Form"
 
 import {
@@ -9,14 +11,16 @@ import {
 
 import {
     ReduxProvider,
-    ThemeInitializer,
+    ThemeProvider,
 } from "./Providers"
 
 export {
     Input,
+    SignupForm,
+    LoginForm,
     
     ReduxProvider,
-    ThemeInitializer,
+    ThemeProvider,
 
     ThemeToggle,
     LoadingBox,

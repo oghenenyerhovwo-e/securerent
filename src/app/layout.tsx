@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 
 // components
-import { ReduxProvider, ThemeInitializer } from '@/components';
+import { ReduxProvider, ThemeProvider } from '@/components';
 import { ToastContainer } from 'react-toastify';
 
 // css
-import { Inter } from "next/font/google";
 import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,21 +21,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <ReduxProvider>
-          <ThemeInitializer />
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-          />
-          {children}
+          <ThemeProvider> 
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+            />
+            {children}
+          </ThemeProvider>
         </ReduxProvider>
       </body>
     </html>

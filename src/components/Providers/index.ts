@@ -1,7 +1,7 @@
 import ReduxProvider from "./ReduxProvider"
-import ThemeInitializer from "./ThemeInitializer"
+import ThemeProvider from "./ThemeProvider"
 
 export {
     ReduxProvider,
-    ThemeInitializer,
+    ThemeProvider,
 }

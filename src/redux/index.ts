@@ -17,9 +17,6 @@ import {
 import {
     setUser,
     clearUser,
-
-    toggleTheme, 
-    setTheme,
 } from "./slices"
 
 export {
@@ -34,7 +31,4 @@ export {
 
     setUser,
     clearUser,
-
-    toggleTheme, 
-    setTheme,
 }

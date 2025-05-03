@@ -3,7 +3,6 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 import {
   userReducer,
-  themeReducer,
 } from './slices';
 import { 
   userApi,
@@ -12,7 +11,6 @@ import {
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    theme: themeReducer,
     [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

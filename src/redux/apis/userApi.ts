@@ -17,7 +17,7 @@ export const userApi = createApi({
     // Example mutation
     login: builder.mutation<any, { email: string; password: string }>({
       query: (body) => ({
-        url: '/auth/login',
+        url: '/login',
         method: 'POST',
         body,
       }),

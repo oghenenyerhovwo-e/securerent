@@ -1,0 +1,54 @@
+.title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+  
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+  
+.googleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: var(--clr-grey-2);
+  font-weight: 500;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid var(--clr-grey-1);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.googleBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.googleIcon {
+  font-size: 1.3rem;
+}
+
+
+  .orDivider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .line {
+    flex: 1;
+    height: 1px;
+    background-color: var(--clr-accent);
+  }
+  
+  .text {
+    font-size: var(--font-300);
+    color: var(--clr-grey-2);
+    white-space: nowrap;
+  }

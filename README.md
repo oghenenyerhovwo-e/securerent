@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+'use client';
 
-## Getting Started
+// module
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
-First, run the development server:
+// component
+import {
+  Input,
+  ThemeToggle,
+  LoadingBox,
+} from '@/components';
+import { motion } from 'framer-motion';
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+// functions and object
+import { useSignupMutation } from '@/redux';
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+// css
+import styles from './signup.module.css';
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+const SignupForm: React.FC = () => {
+  const router = useRouter();
 
-## Learn More
+  const [signup, { isLoading: isSignUpLoading }] = useSignupMutation();
 
-To learn more about Next.js, take a look at the following resources:
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    fullName: '',
+    confirmPassword: '',
+  });
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+    fullName: '',
+    confirmPassword: '',
+  });
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setErrors(prev => ({ ...prev, [e.target.name]: '' }));
+  };
 
-## Deploy on Vercel
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { email, password, fullName, confirmPassword } = formData;
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    let newErrors = { email: '', password: '', fullName: '', confirmPassword: '' };
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    if (!email.includes('@')) newErrors.email = 'Invalid email address';
+    if (email.trim() === '') newErrors.email = 'Invalid email address';
+    if (password.length < 6) newErrors.password = 'Password must be at least 6 characters';
+    if (password.trim() === '') newErrors.password = 'Invalid email address';
+    if (fullName.trim() === '') newErrors.fullName = 'Full name is required';
+    if (confirmPassword !== password) newErrors.confirmPassword = 'Password do not match';
+
+    setErrors(newErrors);
+
+    const hasError = Object.values(newErrors).some(Boolean);
+    if (!hasError) {
+      try {
+        const res = await signup({ fullName, email, password }).unwrap();
+        toast.success(`Thank you ${res.fullName}. Account created successfully! Redirecting to login...`);
+        router.push('/login')
+      } catch (error: any) {
+        toast.error(error?.data?.error || error?.message);
+      } 
+    } else {
+      toast.error("Please fill all fields correctly");
+    }
+  };
+
+  return (
+    <div className={styles.container}>
+      <motion.div
+        className={styles.left}
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className={styles.leftContainer}>
+        
+          <h5 className={styles.header}>SecureRent</h5>
+          <h3 className={styles.title}>Create Account</h3>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <Input
+              label="Full Name"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              error={errors.fullName}
+            />
+            <Input
+              label="Email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              error={errors.email}
+              type="email"
+            />
+            <Input
+              label="Password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              error={errors.password}
+              type="password"
+            />
+            <Input
+              label="Confirm Password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              error={errors.confirmPassword}
+              type="password"
+            />
+            <button type="submit" className={styles.submit} disabled={isSignUpLoading}>
+              {isSignUpLoading ? 'Creating Account...' : 'Sign Up'}
+            </button>
+            <div>
+              {isSignUpLoading && <LoadingBox />}
+            </div>
+            <div className={styles.googleBtn}>Continue with Google</div>
+          </form>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className={styles.right}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+      >        
+        <div>
+          
+        </div>
+      </motion.div>
+      <div className={styles.toggleContainer}>
+        <ThemeToggle />
+      </div>
+    </div>
+  );
+};
+
+export default SignupForm;
