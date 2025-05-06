@@ -1,4 +1,4 @@
-export const signupIllustrations = [
+export const authIllustrations = [
     {
       src: '/images/signupillustration1.png',
       text: 'Find and rent verified apartments and workspaces with just a few clicks.',

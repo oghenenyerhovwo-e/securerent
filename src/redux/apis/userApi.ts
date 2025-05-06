@@ -10,11 +10,11 @@ export const userApi = createApi({
   }),
   tagTypes: ['User'],
   endpoints: (builder) => ({
-    getUser: builder.query<{ name: string; email: string }, void>({
-      query: () => '/auth/me',
+    identifyUser: builder.query<any, void>({
+      query: () => '/me',
       providesTags: ['User'],
     }),
-    // Example mutation
+
     login: builder.mutation<any, { email: string; password: string }>({
       query: (body) => ({
         url: '/login',
@@ -23,6 +23,17 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+
+    googleLogin: builder.mutation<any, { credential: { type: string; token: string } }>({
+      query: (body) => ({
+        url: '/google',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+    
+
     signup: builder.mutation<any, { fullName: string; email: string; password: string }>({
       query: (body) => ({
         url: '/signup',
@@ -31,11 +42,50 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+
+    resendVerificationEmail: builder.mutation<any, { email: string }>({
+      query: (body) => ({
+        url: '/resendVerificationEmail',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+
+    verifyEmail: builder.mutation<any, { token: string }>({
+      query: (body) => ({
+        url: '/verifyemail',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+    forgotPassword: builder.mutation<any, { email: string }>({
+      query: (body) => ({
+        url: '/password/forgot',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+    resetPassword: builder.mutation<any, { password: string, token: string }>({
+      query: (body) => ({
+        url: '/password/reset',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
 export const { 
-  useGetUserQuery, 
+  useIdentifyUserQuery,
   useLoginMutation,
   useSignupMutation,
+  useResendVerificationEmailMutation,
+  useVerifyEmailMutation,
+  useGoogleLoginMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
 } = userApi;

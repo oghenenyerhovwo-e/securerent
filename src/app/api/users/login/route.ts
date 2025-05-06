@@ -10,19 +10,18 @@ databaseConnection()
 
 export async function POST(request: NextRequest){
     try {
-
         const reqBody = await request.json()
         const {email, password} = reqBody;
 
         //check if user exists
         const foundUser = await User.findOne({email})
         if(!foundUser){
-            return NextResponse.json({error: "User does not exist"}, {status: 400})
+            return NextResponse.json({error: "This email has not been registered"}, {status: 400})
         }
 
         if(!foundUser.isVerified){
             return NextResponse.json({error: "Only verified users can login"}, {status: 400})
-          }
+        }
         
         //check if password is correct
         const validPassword = await bcryptjs.compare(password, foundUser.password)
@@ -36,6 +35,7 @@ export async function POST(request: NextRequest){
         const response = NextResponse.json({
             message: "Login successful",
             success: true,
+            user: foundUser,
         })
         response.cookies.set(process.env.COOKIES_NAME!, verifyToken, {
             httpOnly: true,

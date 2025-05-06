@@ -1,13 +1,23 @@
 import {
-    useGetUserQuery,
+    useIdentifyUserQuery,
     useLoginMutation,
     useSignupMutation,
+    useResendVerificationEmailMutation,
+    useVerifyEmailMutation,
+    useGoogleLoginMutation,
+    useForgotPasswordMutation,
+    useResetPasswordMutation,
     userApi,
 } from "./userApi"
 
 export {
-    useGetUserQuery,
+    useIdentifyUserQuery,
     useLoginMutation,
     useSignupMutation,
+    useResendVerificationEmailMutation,
+    useVerifyEmailMutation,
+    useGoogleLoginMutation,
+    useForgotPasswordMutation,
+    useResetPasswordMutation,
     userApi,
 }

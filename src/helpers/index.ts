@@ -18,6 +18,9 @@ import {
     sendEmail,
 } from "./email"
 
+export type { IUser } from "./types";
+
+
 export {
     getTimeAgo,
     toFirstLetterUpperCase,

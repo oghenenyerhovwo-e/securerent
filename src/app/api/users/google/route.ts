@@ -25,6 +25,7 @@ export async function POST(request: NextRequest){
 
         const reqBody = await request.json()
         const { credential } = reqBody;
+        let googleUserData : any;
 
         let decodedDetails: any = {}
         if(credential.type === "credential"){
@@ -42,9 +43,9 @@ export async function POST(request: NextRequest){
         }
 
         let googleSignInToken:any = null;
-        // if user detail is not in database sign up, if it is login
         const foundUser = await User.findOne({email: decodedDetails.email})
         if(foundUser){
+            googleUserData=foundUser
             googleSignInToken = await generateToken(foundUser._id, "SIGN_IN", "1d")
         } else {
             const salt = await bcryptjs.genSalt(10)
@@ -57,13 +58,14 @@ export async function POST(request: NextRequest){
             })
     
             const savedUser = await newUser.save()
-
+            googleUserData=savedUser
             googleSignInToken = await generateToken(savedUser._id, "LOG_IN", "1d")
         }
         
         const response = NextResponse.json({
             message: "Google Login successful",
             success: true,
+            user: googleUserData,
         })
         response.cookies.set(process.env.COOKIES_NAME!, googleSignInToken, {
             httpOnly: true, 

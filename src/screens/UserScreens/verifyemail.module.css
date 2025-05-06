@@ -1,0 +1,56 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--clr-background);
+    padding: 1rem;
+  }
+  
+  .card {
+    background-color: var(--clr-primary);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    max-width: 26rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .text {
+    color: var(--clr-grey-2);
+    margin-top: 0.5rem;
+  }
+  
+  .iconSuccess {
+    color: var(--clr-primary-dark);
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto;
+  }
+  
+  .iconError {
+    color: hsl(0, 70%, 50%);
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto;
+  }
+
+  .resendSection {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .successMsg {
+    color: hsl(153, 57%, 51%);
+    margin-top: 0.5rem;
+  }
+  
+  .errorMsg {
+    color: hsl(0, 70%, 50%);
+    margin-top: 0.5rem;
+  }
+  
+  

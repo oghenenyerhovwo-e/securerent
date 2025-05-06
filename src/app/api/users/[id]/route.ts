@@ -16,8 +16,9 @@ import {
 
 databaseConnection()
 
-export const GET = async ({ params }: { params: {id: string }}) => {  
+export const GET = async (request: NextRequest, { params }: { params: {id: string }}) => {  
   try {
+        request.json()
         const foundProfile = await User.findOne({_id: params.id}).select("-password");
         
         if(!foundProfile){

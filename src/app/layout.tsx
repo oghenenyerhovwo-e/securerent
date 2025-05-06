@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 
 // components
-import { ReduxProvider, ThemeProvider } from '@/components';
+import { 
+  ReduxProvider, 
+  ThemeProvider,
+  IdentifyUserSync,
+} from '@/components';
 import { ToastContainer } from 'react-toastify';
 
 // css
@@ -35,6 +39,7 @@ export default function RootLayout({
               pauseOnHover
               theme="colored"
             />
+            <IdentifyUserSync />
             {children}
           </ThemeProvider>
         </ReduxProvider>

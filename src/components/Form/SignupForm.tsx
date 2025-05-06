@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 import {
   Input,
   LoadingBox,
+  GoogleButton,
 } from '@/components';
-import { FcGoogle } from 'react-icons/fc';
 
 // functions and object
 import { useSignupMutation } from '@/redux';
@@ -57,7 +57,7 @@ const SignupForm = () => {
         if (!hasError) {
           try {
             const res = await signup({ fullName, email, password }).unwrap();
-            toast.success(`Thank you ${res.fullName}. Account created successfully! An email has been sent to the address you provided, verify the email, then login...`);
+            toast.success(`Secure Rent greets you ${res.fullName}. An email has been sent to the address you provided, verify the email, and then login...`);
           } catch (error: any) {
             toast.error(error?.data?.error || error?.message);
           } 
@@ -111,15 +111,13 @@ const SignupForm = () => {
                 <div>
                     {isSignUpLoading && <LoadingBox />}
                 </div>
+                <GoogleButton />
                 <div className={styles.orDivider}>
                     <span className={styles.line}></span>
                     <h5 className={styles.text}>or</h5>
                     <span className={styles.line}></span>
                 </div>
-                <div className={styles.googleBtn}>
-                    <FcGoogle className={styles.googleIcon} />
-                    Continue with Google
-                </div>
+                
             </form>
         </>
     )

@@ -3,13 +3,13 @@ import {
   NoUserOnly,
 } from '@/components';
 import {
-  AuthScreen,
+  ForgotPasswordScreen,
 } from "@/screens"
 
 const AuthPage: React.FC = () => {
  return (
     <NoUserOnly>
-      <AuthScreen />
+      <ForgotPasswordScreen />
     </NoUserOnly>
   );
 };

@@ -9,7 +9,11 @@ import { motion } from 'framer-motion';
 // css
 import styles from './loading.module.css';
 
-const Loading: React.FC = () => {
+interface LoadingBoxProps {
+  message?: string;
+}
+
+const Loading: React.FC = ({ message = 'Loading...' }: LoadingBoxProps) => {
   return (
     <motion.div 
       className={styles.loadingWrapper}
@@ -22,6 +26,7 @@ const Loading: React.FC = () => {
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, ease: "linear", duration: 1 }}
       />
+      <h5>{message}</h5>
     </motion.div>
   );
 };

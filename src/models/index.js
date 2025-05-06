@@ -1,4 +1,5 @@
 import User from "./User"
+import { IUser } from "./User"
 import Comment from "./Comment"
 import Listing from "./Listing"
 import Bid from "./Bid"
@@ -8,4 +9,5 @@ export {
     Comment,
     Listing,
     Bid,
+    IUser,
 }

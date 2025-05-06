@@ -1,33 +1,27 @@
-// Install with: npm install @trycourier/courier
-import { CourierClient } from "@trycourier/courier";
+import nodemailer from "nodemailer";
 
-const courier = new CourierClient({ authorizationToken: process.env.COURIER_AUTH_TOKEN });
-
-export const sendEmail = async (
-  email: string,
-  subject: string,
-  body: string,
-) => {
-  try{
-    const { requestId } = await courier.send({
-      message: {
-        to: {
-          email: email,
-        },
-        template: "4D5Y94Z55548JXKK3AWJGEHRG9ZD",
-        data: {
-          subject,
-          body,
-        },
+export const sendEmail = async (to: string, subject: string, html: string) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.NODEMAILER_APP_EMAIL!,
+        pass: process.env.NODEMAILER_APP_PASSWORD!,
       },
     });
-    console.log(requestId)
-    if(requestId){
-      return true
-    }
-    return false
-  } catch(error){
-    console.log(error)
-    return false
+
+    const mailOptions = {
+      from: `"Secure Rent" <${process.env.NODEMAILER_APP_EMAIL!}>`,
+      to,
+      subject,
+      html,
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sent:", info.response);
+    return true;
+  } catch (error) {
+    console.error("Email sending error:", error);
+    return false;
   }
-}
+};

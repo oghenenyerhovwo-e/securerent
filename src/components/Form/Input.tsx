@@ -10,11 +10,12 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import styles from './form.module.css';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
+  type?: string;
 }
 
 const Input: React.FC<InputProps> = ({ label, name, value, onChange, error, type = 'text', ...rest }) => {

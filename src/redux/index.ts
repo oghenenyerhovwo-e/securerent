@@ -8,15 +8,20 @@ import {
 } from "./store"
 
 import {
-    useGetUserQuery,
+    useIdentifyUserQuery,
     useLoginMutation,
     useSignupMutation,
+    useResendVerificationEmailMutation,
+    useVerifyEmailMutation,
+    useGoogleLoginMutation,
+    useForgotPasswordMutation,
+    useResetPasswordMutation,
     userApi,
 } from "./apis"
 
 import {
-    setUser,
-    clearUser,
+    setCurrentUser, 
+    clearCurrentUser,
 } from "./slices"
 
 export {
@@ -24,11 +29,16 @@ export {
     useAppDispatch,
     useAppSelector,
 
-    useGetUserQuery,
+    useIdentifyUserQuery,
     useLoginMutation,
     useSignupMutation,
+    useResendVerificationEmailMutation,
+    useVerifyEmailMutation,
+    useGoogleLoginMutation,
+    useForgotPasswordMutation,
+    useResetPasswordMutation,
     userApi,
 
-    setUser,
-    clearUser,
+    setCurrentUser, 
+    clearCurrentUser,
 }

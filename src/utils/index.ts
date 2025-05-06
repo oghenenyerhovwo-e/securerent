@@ -1,7 +1,7 @@
 import {
-    signupIllustrations,
+    authIllustrations,
 } from "./designData"
 
 export {
-    signupIllustrations,
+    authIllustrations,
 }

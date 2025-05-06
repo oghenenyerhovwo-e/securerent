@@ -45,6 +45,7 @@ export const PUT = async (request: NextRequest) => {
         const response = NextResponse.json({
             message: "Password reset successfully",
             userId: updatedProfile._id,
+            email: updatedProfile.email,
         })
 
       return response

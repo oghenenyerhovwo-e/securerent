@@ -1,12 +1,12 @@
 import {
-    setUser,
-    clearUser,
+    setCurrentUser, 
+    clearCurrentUser,
 } from "./userSlice"
 
 import userReducer from "./userSlice"
 
 export {
-    setUser,
-    clearUser,
+    setCurrentUser, 
+    clearCurrentUser,
     userReducer,
 }

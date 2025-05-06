@@ -56,7 +56,7 @@
   --clr-background: hsl(160, 60%, 98%);
   --clr-text: hsl(215, 21%, 11%);
   --clr-primary: hsl(153, 57%, 51%);
-  --clr-primary-dark: hsl(154, 60%, 30%);
+  --clr-primary-dark: hsl(154, 59%, 30%);
   --clr-secondary: hsl(192, 56%, 74%);
   --clr-secondary-dark: hsl(191, 56%, 26%);
   --clr-accent: hsl(205, 57%, 61%);
@@ -263,6 +263,7 @@ html {
   justify-content: center;
   gap: 0.5rem;
   font-weight: 500;
+  background-color: transparent;
 }
 
 .btn-primary {

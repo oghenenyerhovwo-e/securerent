@@ -24,7 +24,7 @@ export const generateToken= async (
 
 export const getDataFromToken = (token: any, type: string) => {
   try {
-      const decodedToken:any = jwt.verify(token, process.env.TOKEN_SECRET!);
+      const decodedToken:any = jwt.verify(token, process.env.JWT_SECRET!);
       if(type === decodedToken.type){
         return decodedToken._id
       }
