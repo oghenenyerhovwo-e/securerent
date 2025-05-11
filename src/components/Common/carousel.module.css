@@ -1,15 +1,18 @@
 
 .carousel {
     width: 90%;
+    height: 100%;
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
   }
   
   .illustration {
     max-width: 100%;
-    height: auto;
+    width: auto;
+    height: min(60vh, 20rem);
     object-fit: contain;
     margin-bottom: 1.5rem;
   }
@@ -19,6 +22,16 @@
     color: #fff;
     margin-bottom: 1rem;
     line-height: 1.6;
+  }
+
+  .dotsContainer{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
   
   .dots {

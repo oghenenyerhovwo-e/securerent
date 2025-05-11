@@ -21,12 +21,13 @@ import {
 
 // functions and object
 import { authIllustrations } from "@/utils"
+import { validateInputField, forgotPasswordRequiredFields } from "@/utils"
 
 // css
-import styles from './forgotpassword.module.css';
+import styles from '@/styles/formscreen.module.css';
 
 
-const ForgotPasswordScreen: React.FC = () => {
+const ForgotPasswordScreen = () => {
         
         const [forgotPassword, { isLoading: isForgotPasswordLoading }] = useForgotPasswordMutation();
     
@@ -44,27 +45,19 @@ const ForgotPasswordScreen: React.FC = () => {
     
         const handleSubmit = async (e: React.FormEvent) => {
             e.preventDefault();
-            const { email } = formData;
-        
-            let newErrors = { email: '' };
-        
-            if (!email.includes('@')) newErrors.email = 'Invalid email address';
-            if (email.trim() === '') newErrors.email = 'Invalid email address';
-        
-            setErrors(newErrors);
-        
-            const hasError = Object.values(newErrors).some(Boolean);
-            if (!hasError) {
-              try {
-                const res = await forgotPassword({ email }).unwrap();
-                toast.success(`A password recovery email has been sent to ${res?.email}.`);
-
-              } catch (error: any) {
-                toast.error(error?.data?.error || error?.message);
-              } 
-            } else {
-              toast.error("Please fill all fields correctly");
+            const {hasError, newErrors} = validateInputField(forgotPasswordRequiredFields, formData)
+            
+            if (hasError) {
+                setErrors(newErrors)
+                return toast.error("Please fill all fields correctly")
             }
+            try {
+              const res = await forgotPassword(formData).unwrap();
+              toast.success(`A password recovery email has been sent to ${res?.email}.`);
+
+            } catch (error: any) {
+              toast.error(error?.data?.error || error?.message);
+            } 
         };
 
   return (

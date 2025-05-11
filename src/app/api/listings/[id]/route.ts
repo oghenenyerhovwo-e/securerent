@@ -28,7 +28,6 @@ export const GET = async (request: NextRequest, { params }: { params: { id: stri
           select: "-password",
         })
         .populate("comments")
-        .select("-address")
 
         const response = NextResponse.json({
             message: "Listing found successfully",
@@ -48,7 +47,7 @@ export const PUT = async (request: NextRequest, { params }: { params: {id: strin
 
         const userId = await getDataFromToken(token, "LOG_IN");
         const foundUser = await User.findOne({_id: userId}).select("-password");
-        const foundListing = await Listing.findOne({id: params.id})
+        const foundListing = await Listing.findOne({_id: params.id})
       
         if(!foundUser){
           return NextResponse.json({error: "No user found, Please login"}, {status: 400})

@@ -34,7 +34,7 @@
     "src/models/Listing.ts", 
     "src/config/index.js", 
     "src/models/User.ts", 
-    "src/models/index.js", 
+    "src/models/index.ts", 
   ],
   "exclude": ["node_modules"]
 }

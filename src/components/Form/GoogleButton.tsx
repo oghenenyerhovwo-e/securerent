@@ -44,12 +44,8 @@ const GoogleButton = () => {
         window.google.accounts.id.initialize({
           client_id: process.env.NEXT_PUBLIC_GOOGLE_ID!,
           callback: handleGoogleLogin,
+          ux_mode: 'popup',
         });
-
-        window.google.accounts.id.renderButton(
-          document.getElementById('google-signin-button'),
-          { theme: 'outline', size: 'large' }
-        );
       }
     };
 
@@ -77,11 +73,22 @@ const GoogleButton = () => {
     return () => clearInterval(timer);
   }, [router]);
 
+  const handleGoogleClick =() => {
+    if (window.google) {
+      window.google.accounts.id.prompt();
+    } else {
+      toast.error("Google sign-in not available right now.");
+    }
+  }
+
+
   return (
-    <div id="google-signin-button" className={styles.googleBtn}>
-        <FcGoogle className={styles.googleIcon} />
-        Continue with Google
-    </div>
+    <>
+        <div id="google-signin-button" onClick={handleGoogleClick} className={styles.googleBtn}>
+          <FcGoogle className={styles.googleIcon} />
+          <span>Continue with Google</span>
+        </div>
+    </>
   )
 };
 

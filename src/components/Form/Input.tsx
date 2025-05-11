@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = ({ label, name, value, onChange, error, type
 
   return (
     <div className={styles.inputGroup}>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>{label} {rest.required && <span className={styles.asterisk}>*</span>}</label>
       <div className={styles.inputWrapper}>
         <input
           id={name}

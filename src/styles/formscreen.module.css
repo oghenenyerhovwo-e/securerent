@@ -101,11 +101,48 @@
   color: #fff;
 }
 
+.title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
   
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+  
+  .orDivider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .line {
+    flex: 1;
+    height: 1px;
+    background-color: var(--clr-accent);
+  }
+  
+  .text {
+    font-size: var(--font-300);
+    color: var(--clr-grey-2);
+    white-space: nowrap;
+  }
 
-  
-  
-  @media (min-width: 768px) {
+.resendEmail{
+  text-decoration: underline;
+}
+
+.forgotPassword{
+  display: flex;
+  justify-content: flex-end;
+  font-size: var(--fs-200);
+  color: var(--clr-accent);
+}
+
+  @media (min-width: 900px) {
     .container {
       flex-direction: row;
     }
@@ -114,4 +151,15 @@
       display: flex;
     }
   }
-  
+
+  @media (min-width: 900px) {
+  .rightContent {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;         
+    height: 100vh;
+    z-index: 1;
+    padding: 1rem;
+  }
+}

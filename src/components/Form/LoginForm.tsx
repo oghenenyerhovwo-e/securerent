@@ -18,9 +18,10 @@ import {
     useLoginMutation, 
     useResendVerificationEmailMutation,
 } from '@/redux';
+import { validateInputField, loginRequiredFields } from "@/utils"
 
 // css
-import styles from './sign.module.css';
+import styles from '@/styles/formscreen.module.css';
 
 const LoginForm = () => {
     const router = useRouter();
@@ -32,6 +33,7 @@ const LoginForm = () => {
         email: '',
         password: '',
     });
+    
     const [errors, setErrors] = useState({
         email: '',
         password: '',
@@ -40,9 +42,9 @@ const LoginForm = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
         setErrors(prev => ({ ...prev, [e.target.name]: '' }));
-      };
+    };
 
-      const handleResendEmailVerification = async () => {
+    const handleResendEmailVerification = async () => {
         const { email } = formData;
         try {
             const res = await resendVerificationEmail({ email }).unwrap();
@@ -54,42 +56,34 @@ const LoginForm = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const { email, password } = formData;
-    
-        let newErrors = { email: '', password: '' };
-    
-        if (!email.includes('@')) newErrors.email = 'Invalid email address';
-        if (email.trim() === '') newErrors.email = 'Invalid email address';
-        if (password.trim() === '') newErrors.password = 'Invalid password ';
-    
-        setErrors(newErrors);
-    
-        const hasError = Object.values(newErrors).some(Boolean);
-        if (!hasError) {
-          try {
-            const res = await login({ email, password }).unwrap();
+        const {hasError, newErrors} = validateInputField(loginRequiredFields, formData)
+                
+        if (hasError) {
+            setErrors(newErrors)
+            return toast.error("Please fill all fields correctly")
+        }
+
+        try {
+            const res = await login(formData).unwrap();
             toast.success(`Welcome back ${res?.user?.fullName}.`);
             toast.success(`Redirecting to dashboard...`);
             setTimeout(() => {
                 router.push('/dashboard');
-              }, 5000);
-          } catch (error: any) {
-            if((error?.data?.error || error?.message) === "Only verified users can login"){
-                toast.error(
-                    <div>
-                      <h5 className='spacing-sm'>Account Created!</h5>
-                      <p className='spacing-sm'>Only verified users can login</p>
-                      <p className='spacing-sm'>Check your email inbox/spams for link to verify</p>
-                      <p>Can't find email? click <span className={styles.resendEmail} onClick={handleResendEmailVerification}>Resend Email</span> </p>
-                    </div>,
-                    { autoClose: 30000 }
-                  );
-            } else {
-                toast.error(error?.data?.error || error?.message);
-            }
-          } 
+            }, 5000);
+        } catch (error: any) {
+        if((error?.data?.error || error?.message) === "Only verified users can login"){
+            toast.error(
+                <div>
+                    <h5 className='spacing-sm'>Account Created!</h5>
+                    <p className='spacing-sm'>Only verified users can login</p>
+                    <p className='spacing-sm'>Check your email inbox/spams for link to verify</p>
+                    <p>Can't find email? click <span className={styles.resendEmail} onClick={handleResendEmailVerification}>Resend Email</span> </p>
+                </div>,
+                { autoClose: 30000 }
+            );
         } else {
-          toast.error("Please fill all fields correctly");
+            toast.error(error?.data?.error || error?.message);
+        }
         }
     };
 

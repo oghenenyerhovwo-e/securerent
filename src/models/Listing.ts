@@ -106,14 +106,16 @@ const listingsSchema = new Schema<IListing>({
         required: [true, "Listing must have a featured image"],
     },
     galleryImgs: {
-        type: [{
-            _id: Number,
-            url: String,
-        }],
+        type: [String],
+        validate: {
+            validator: function (val: string[]) {
+                return val.length <= 10;
+            },
+            message: "You can upload a maximum of 10 images in the gallery."
+        }
     },
     video: {
         type: String,
-        required: [true, "Listing must have a video"],
     },
     virtualTour: {
         type: String,

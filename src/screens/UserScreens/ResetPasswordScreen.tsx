@@ -20,13 +20,13 @@ import {
 
 // functions and object
 import { authIllustrations } from "@/utils"
+import { validateInputField, resetPasswordRequiredFields } from "@/utils"
 
 // css
-import styles from './forgotpassword.module.css';
+import styles from '@/styles/formscreen.module.css';
 
 
 const ResetPasswordScreen = ({ params }: { params: { token: string } }) => {
-        
         const [resetPassword, { isLoading: isResetPasswordLoading }] = useResetPasswordMutation();
     
         const [formData, setFormData] = useState({
@@ -45,26 +45,20 @@ const ResetPasswordScreen = ({ params }: { params: { token: string } }) => {
     
         const handleSubmit = async (e: React.FormEvent) => {
             e.preventDefault();
-            const { password, confirmPassword } = formData;
-        
-            let newErrors = { password: '', confirmPassword: '' };
-        
-            if (password.trim() === '') newErrors.password = 'Invalid password address';
-            if (confirmPassword !== password) newErrors.confirmPassword = 'Password do not match';
-        
-            setErrors(newErrors);
 
-            const hasError = Object.values(newErrors).some(Boolean);
-            if (!hasError) {
-              try {
-                const res = await resetPassword({ password, token: params?.token }).unwrap();
+            const {hasError, newErrors} = validateInputField(resetPasswordRequiredFields, formData)
+                    
+            if (hasError) {
+                setErrors(newErrors)
+                return toast.error("Please fill all fields correctly")
+            }
+
+            try {
+                const res = await resetPassword({ password: formData.password, token: params?.token }).unwrap();
                 toast.success(`Password has been changed for ${res?.email}.`);
 
-              } catch (error: any) {
+            } catch (error: any) {
                 toast.error(error?.data?.error || error?.message);
-              } 
-            } else {
-              toast.error("Please fill all fields correctly");
             }
         };
 

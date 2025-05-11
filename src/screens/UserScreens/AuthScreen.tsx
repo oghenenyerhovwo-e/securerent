@@ -16,10 +16,10 @@ import { motion } from 'framer-motion';
 import { authIllustrations } from "@/utils"
 
 // css
-import styles from './auth.module.css';
+import styles from '@/styles/formscreen.module.css';
 
 
-const AuthScreen: React.FC = () => {
+const AuthScreen = () => {
   const [activeTab, setActiveTab] = useState("login");
 
   return (

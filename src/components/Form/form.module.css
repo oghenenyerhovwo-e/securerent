@@ -1,3 +1,5 @@
+/* Input */
+
 .inputGroup {
   display: flex;
   flex-direction: column;
@@ -6,13 +8,9 @@
 .inputGroup > label {
   font-weight: 600;
   font-size: var(--fs-300);
-}
-
-.inputWrapper {
-  position: relative;
   display: flex;
   align-items: center;
-  margin-top: 0.4rem;
+  gap: 0.4rem;
 }
 
 .input {
@@ -40,6 +38,14 @@
   -webkit-text-fill-color: var(--clr-grey-2) !important;
 }
 
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 0.4rem;
+}
+
 .eyeIcon {
   position: absolute;
   right: 0.8rem;
@@ -57,3 +63,150 @@
   font-size: 0.85rem;
   margin-top: 0.3rem;
 }
+
+.asterisk {
+  color: var(--clr-error);
+  margin-left: 2px;
+}
+
+
+/* Textarea */
+.textarea {
+  min-height: 6.25rem;
+  max-height: 25rem;
+}
+
+
+/* checkbox */
+/* styles/Checkbox.module.css */
+.checkBoxContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem
+}
+
+.checkBoxContainer > label{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.checkBoxContainer > label >span{
+  font-size: var(--fs-300);
+  color: var(--clr-grey-2);
+}
+
+.checkBoxContainer  input[type="checkbox"] {
+  cursor: pointer;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.checkBoxGroupContainer > label{
+  font-weight: 600;
+  font-size: var(--fs-300);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.checkBoxGroupContainer .checkBoxContainer > label{
+  width: 10rem;
+}
+
+.checkBoxGroupWrapper{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 1rem;
+  align-items: flex-start;
+}
+
+
+/* File Upload Single */
+.uploadContainer {
+  padding: 1.2rem;
+  border: 2px dashed #cbd5e0;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+.dropzone {
+  padding: 30px;
+  cursor: pointer;
+  color: var(--clr-grey-2);
+}
+
+.dropzone.active {
+  border-color: var(--clr-secondary);
+}
+
+.previewGrid{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.preview {
+  margin-top: 1.2rem;
+  max-width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.previewImg{
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+}
+
+.preview > img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.error {
+  color: var(--clr-error);
+  margin-top: 0.8rem;
+}
+
+.sizeInfo {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--clr-grey-2);
+}
+
+.fileTypeInfo {
+  font-size: 0.875rem;
+  color: var(--clr-grey-2);
+  margin-top: 0.5rem;
+}
+
+
+.removeButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 2rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  padding: 4px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s ease;
+  font-size: var(--fs-300);
+}
+
+.previewImg:hover .removeButton{
+  background: var(--clr-error);
+  color: white;
+}
+
+

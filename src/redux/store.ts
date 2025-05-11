@@ -6,15 +6,19 @@ import {
 } from './slices';
 import { 
   userApi,
+  listingApi,
 } from './apis';
 
 export const store = configureStore({
   reducer: {
     userStore: userReducer,
     [userApi.reducerPath]: userApi.reducer,
+    [listingApi.reducerPath]: listingApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(userApi.middleware),
+    getDefaultMiddleware()
+      .concat(userApi.middleware)
+      .concat(listingApi.middleware),
 });
 
 setupListeners(store.dispatch);

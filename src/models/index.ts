@@ -4,10 +4,11 @@ import Comment from "./Comment"
 import Listing from "./Listing"
 import Bid from "./Bid"
 
+export type { IUser }
+
 export {
     User,
     Comment,
     Listing,
     Bid,
-    IUser,
 }

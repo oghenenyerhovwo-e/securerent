@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 import { useVerifyEmailMutation, useResendVerificationEmailMutation } from '@/redux/';
 
 // css
-import styles from './verifyemail.module.css';
+import styles from '@/styles/confirmtoken.module.css';
 
 export default function VerifyEmailPage({ params }: { params: { token: string } }) {
   const router = useRouter();

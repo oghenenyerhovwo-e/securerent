@@ -13,9 +13,10 @@ import {
 
 // functions and object
 import { useSignupMutation } from '@/redux';
+import { validateInputField, signUpRequiredFields } from "@/utils"
 
 // css
-import styles from './sign.module.css';
+import styles from '@/styles/formscreen.module.css';
 
 const SignupForm = () => {    
     const [signup, { isLoading: isSignUpLoading }] = useSignupMutation();
@@ -39,31 +40,24 @@ const SignupForm = () => {
       };
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const { email, password, fullName, confirmPassword } = formData;
-    
-        let newErrors = { email: '', password: '', fullName: '', confirmPassword: '' };
-    
-        if (!email.includes('@')) newErrors.email = 'Invalid email address';
-        if (email.trim() === '') newErrors.email = 'Invalid email address';
-        if (password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-        if (password.trim() === '') newErrors.password = 'Invalid email address';
-        if (fullName.trim() === '') newErrors.fullName = 'Full name is required';
-        if (confirmPassword !== password) newErrors.confirmPassword = 'Password do not match';
-    
-        setErrors(newErrors);
-    
-        const hasError = Object.values(newErrors).some(Boolean);
-        if (!hasError) {
-          try {
-            const res = await signup({ fullName, email, password }).unwrap();
-            toast.success(`Secure Rent greets you ${res.fullName}. An email has been sent to the address you provided, verify the email, and then login...`);
-          } catch (error: any) {
-            toast.error(error?.data?.error || error?.message);
-          } 
-        } else {
-          toast.error("Please fill all fields correctly");
+        e.preventDefault();    
+        const {hasError, newErrors} = validateInputField(signUpRequiredFields, formData)
+        
+        if (hasError) {
+            setErrors(newErrors)
+            return toast.error("Please fill all fields correctly")
         }
+
+        try {
+            const res = await signup({ 
+                fullName: formData.fullName, 
+                email: formData.email, 
+                password: formData.password, 
+            }).unwrap();
+            toast.success(`Secure Rent greets you ${res.fullName}. An email has been sent to the address you provided, verify the email, and then login...`);
+        } catch (error: any) {
+            toast.error(error?.data?.error || error?.message);
+        } 
     };
 
     return (

@@ -61,14 +61,16 @@ const Carousel: React.FC<CarouselProps> = ({ items, interval = 5000 }) => {
             </p>
         </motion.div>
         </AnimatePresence>
-        <div className={styles.dots}>
-            {items.map((_, index) => (
-                <BsDot
-                key={index}
-                size={28}
-                className={index === currentIndex ? styles.activeDot : styles.inactiveDot}
-                />
-            ))}
+        <div className={styles.dotsContainer}>
+          <div className={styles.dots}>
+              {items.map((_, index) => (
+                  <BsDot
+                  key={index}
+                  size={28}
+                  className={index === currentIndex ? styles.activeDot : styles.inactiveDot}
+                  />
+              ))}
+          </div>
         </div>
     </div>
   );
